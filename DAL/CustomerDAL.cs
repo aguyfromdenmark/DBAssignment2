@@ -4,11 +4,19 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using MongoDB;
+using MongoDB.Driver;
 
 namespace DAL
 {
     public class CustomerDAL : IDatabase<CustomerModel>
     {
+        private IMongoClient MongoClient;
+
+        public CustomerDAL()
+        {
+            MongoClient = new MongoClient("mongodb://localhost:27017");
+        }
         public void Create(CustomerModel item)
         {
             throw new NotImplementedException();
