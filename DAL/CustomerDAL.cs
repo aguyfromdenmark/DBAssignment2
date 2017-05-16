@@ -38,7 +38,15 @@ namespace DAL
 
         public List<CustomerModel> GetAll()
         {
-            throw new NotImplementedException();
+            var items = collection.Find(new BsonDocument()).ToList();
+            var returnList = new List<CustomerModel>();
+
+            foreach (var document in items)
+            {
+                returnList.Add(JsonConvert.DeserializeObject<CustomerModel>(document.ToJson()));
+            }
+
+            return returnList;
         }
 
         public CustomerModel GetSingle(string itemId)
