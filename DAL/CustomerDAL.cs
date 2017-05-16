@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using MongoDB;
 using MongoDB.Driver;
 using MongoDB.Bson;
+using Newtonsoft.Json;
 
 namespace DAL
 {
@@ -42,7 +43,9 @@ namespace DAL
 
         public CustomerModel GetSingle(string itemId)
         {
-            throw new NotImplementedException();
+            var filter = Builders<BsonDocument>.Filter.Eq("_id", itemId);
+            var item = collection.Find(filter);
+            return JsonConvert.DeserializeObject<CustomerModel>(item.ToJson());
         }
 
         public void Update(CustomerModel item)
@@ -50,9 +53,11 @@ namespace DAL
             throw new NotImplementedException();
         }
 
-        public CustomerModel GetByPhone(string phoneNuber)
+        public CustomerModel GetByPhone(string phoneNumber)
         {
-            throw new NotImplementedException();
+            var filter = Builders<BsonDocument>.Filter.Eq("PhoneNumber", phoneNumber);
+            var item = collection.Find(filter);
+            return JsonConvert.DeserializeObject<CustomerModel>(item.ToJson());
         }
     }
 }
