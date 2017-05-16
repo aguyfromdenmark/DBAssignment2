@@ -24,7 +24,9 @@ namespace DAL
         }
         public void Create(CustomerModel item)
         {
-            throw new NotImplementedException();
+            var itemAsJson = item.ToJson();
+            var itemAsBson = itemAsJson.ToBsonDocument();
+            collection.InsertOne(itemAsBson);
         }
 
         public void Delete(string itemId)
