@@ -6,16 +6,21 @@ using System.Text;
 using System.Threading.Tasks;
 using MongoDB;
 using MongoDB.Driver;
+using MongoDB.Bson;
 
 namespace DAL
 {
     public class CustomerDAL : IDatabase<CustomerModel>
     {
-        private IMongoClient MongoClient;
+        private IMongoClient mongoClient;
+        private IMongoDatabase database;
+        private IMongoCollection<BsonDocument> collection;
 
         public CustomerDAL()
         {
-            MongoClient = new MongoClient("mongodb://localhost:27017");
+            mongoClient = new MongoClient("mongodb://localhost:27017");
+            database = mongoClient.GetDatabase("CustomerInfoDb");
+            collection = database.GetCollection<BsonDocument>("Customers");
         }
         public void Create(CustomerModel item)
         {
