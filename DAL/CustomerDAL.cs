@@ -31,7 +31,8 @@ namespace DAL
 
         public void Delete(string itemId)
         {
-            throw new NotImplementedException();
+            var filter = Builders<BsonDocument>.Filter.Eq("_id", itemId);
+            collection.DeleteOne(filter);
         }
 
         public List<CustomerModel> GetAll()
