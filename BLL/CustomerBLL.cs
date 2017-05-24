@@ -6,11 +6,10 @@ namespace BLL
 {
     public class CustomerBLL
     {
-        private CustomerDAL _customerDAL;
+        private CustomerDAL _customerDAL = new CustomerDAL();
 
         public CustomerBLL()
         {
-            _customerDAL = new CustomerDAL();
         }
 
         public CustomerModel GetCustomerById(string id)

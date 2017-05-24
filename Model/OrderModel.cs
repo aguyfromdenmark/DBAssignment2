@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MongoDB.Bson;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,14 +9,16 @@ namespace Model
 {
     public class OrderModel
     {
-        public string Id { get; set; }
+        public ObjectId Id { get; set; }
         public DateTime DatePlaces { get; set; }
         public List<OrderLineModel> Lines { get; set; }
         public int TotalPrice { get; set; }
 
         public OrderModel()
         {
-            Lines = new List<OrderLineModel>();    
+            Lines = new List<OrderLineModel>();
         }
+
+
     }
 }

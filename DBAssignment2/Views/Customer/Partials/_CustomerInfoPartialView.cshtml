@@ -1,0 +1,30 @@
+﻿@using Model
+@model CustomerModel
+
+<ul>
+    <li>@Model.FirstName @Model.LastName</li>
+    <li>@Model.Address - @Model.ZipCode @Model.City</li>
+    <li><i>@Model.PhoneNumber</i></li>
+    <li>@Model.Email</li>
+    <li>
+        <strong>Orders</strong>
+
+            @foreach (var order in Model.Orders)
+            {
+                <ul>
+                    <li>@order.Id</li>
+                    <li>@order.DatePlaces</li>
+                    <li>
+                        <strong>Lines</strong>
+                        <ul>
+                            @foreach (var line in order.Lines)
+                {
+                                <li>@line.Id - @line.Name - @line.Quantity - @line.Price</li>
+                            }
+                        </ul>
+                    </li>
+                    <li>@order.TotalPrice</li>
+                </ul>
+            }
+    </li>
+</ul>

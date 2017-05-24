@@ -1,0 +1,54 @@
+﻿@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Customer Information System</h2>
+
+<div>
+    @using (Html.BeginForm("GetCustomerByPhone", "Customer", FormMethod.Post, new { @id = "searchByPhoneForm" }))
+    {
+        @Html.TextBox("phoneNumber", null, new { placeholder = "Search by phone number" })
+        <button type="submit">Search</button>
+    }
+</div>
+
+<div>
+    @using (Html.BeginForm("CreateCustomer", "Customer", FormMethod.Post, new { @id = "createCustomerForm" }))
+    {
+        <input type="text" name="FirstName" placeholder="First Name" />
+        <input type="text" name="LastName" placeholder="Last Name" />
+        <input type="text" name="Address" placeholder="Address" />
+        <input type="number" name="ZipCode" placeholder="Zip code" />
+        <input type="text" name="City" placeholder="City" />
+        <input type="tel" name="PhoneNumber" placeholder="Phone Number" />
+        <input type="email" name="Email" placeholder="Email" />
+        <div id="orderLines">
+            <p>I have scoped the system to automatically add some order lines to customers.</p>
+        </div>
+
+        <button type="submit">Create</button>
+    }
+</div>
+
+<div id="result">
+
+</div>
+
+@section scripts {
+    <script>
+        $('#createCustomerForm').on('submit',function(e){
+            e.preventDefault();
+            $(this).ajaxSubmit({
+                target: $('#result')
+            });
+        });
+
+        $('#searchByPhoneForm').on('submit', function (e) {
+            e.preventDefault();
+            $(this).ajaxSubmit({
+                target: $('#result')
+            })
+        });
+    </script>
+}
+

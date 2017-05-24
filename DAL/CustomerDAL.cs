@@ -8,6 +8,7 @@ using MongoDB;
 using MongoDB.Driver;
 using MongoDB.Bson;
 using Newtonsoft.Json;
+using MongoDB.Bson.Serialization;
 
 namespace DAL
 {
@@ -26,7 +27,7 @@ namespace DAL
         public void Create(CustomerModel item)
         {
             var itemAsJson = item.ToJson();
-            var itemAsBson = itemAsJson.ToBsonDocument();
+            var itemAsBson = BsonSerializer.Deserialize<BsonDocument>(itemAsJson);
             collection.InsertOne(itemAsBson);
         }
 
@@ -64,8 +65,10 @@ namespace DAL
         public CustomerModel GetByPhone(string phoneNumber)
         {
             var filter = Builders<BsonDocument>.Filter.Eq("PhoneNumber", phoneNumber);
-            var item = collection.Find(filter);
-            return JsonConvert.DeserializeObject<CustomerModel>(item.ToJson());
+
+            var item = collection.Find(filter).FirstOrDefault();
+
+            return BsonSerializer.Deserialize<CustomerModel>(item);
         }
     }
 }
