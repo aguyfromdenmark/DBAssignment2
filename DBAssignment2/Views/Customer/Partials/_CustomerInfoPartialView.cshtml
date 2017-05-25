@@ -2,6 +2,7 @@
 @model CustomerModel
 
 <ul>
+    <li>@Model.Id.ToString()</li>
     <li>@Model.FirstName @Model.LastName</li>
     <li>@Model.Address - @Model.ZipCode @Model.City</li>
     <li><i>@Model.PhoneNumber</i></li>
@@ -12,14 +13,14 @@
             @foreach (var order in Model.Orders)
             {
                 <ul>
-                    <li>@order.Id</li>
+                    <li>@order.Id.ToString()</li>
                     <li>@order.DatePlaces</li>
                     <li>
                         <strong>Lines</strong>
                         <ul>
                             @foreach (var line in order.Lines)
                 {
-                                <li>@line.Id - @line.Name - @line.Quantity - @line.Price</li>
+                                <li>@line.Id.ToString() - @line.Name - @line.Quantity - @line.Price</li>
                             }
                         </ul>
                     </li>

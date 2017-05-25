@@ -21,7 +21,7 @@ namespace DBAssignment2.Controllers
         public ActionResult GetCustomerByPhone(string phoneNumber)
         {
             var customer = _customerBll.GetCustomerByPhone(phoneNumber);
-            return PartialView("Partials/_CustomerInfoPartialView");
+            return PartialView("Partials/_CustomerInfoPartialView",customer);
         }
 
         public ActionResult CreateCustomer(CustomerModel customer)

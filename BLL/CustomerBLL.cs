@@ -12,19 +12,9 @@ namespace BLL
         {
         }
 
-        public CustomerModel GetCustomerById(string id)
-        {
-            return _customerDAL.GetSingle(id);
-        }
-
         public CustomerModel GetCustomerByPhone(string phoneNumber)
         {
             return _customerDAL.GetByPhone(phoneNumber);
-        }
-
-        public List<CustomerModel> GetAllCustomers()
-        {
-            return _customerDAL.GetAll();
         }
 
         public void CreateCustomer(CustomerModel customer)

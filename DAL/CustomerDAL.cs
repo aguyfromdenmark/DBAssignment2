@@ -30,6 +30,16 @@ namespace DAL
             var itemAsBson = BsonSerializer.Deserialize<BsonDocument>(itemAsJson);
             collection.InsertOne(itemAsBson);
         }
+        public CustomerModel GetByPhone(string phoneNumber)
+        {
+            int phoneNumberAsInt = Int32.Parse(phoneNumber);
+
+            var filter = Builders<BsonDocument>.Filter.Eq("PhoneNumber", phoneNumberAsInt);
+
+            var item = collection.Find(filter).FirstOrDefault();
+
+            return BsonSerializer.Deserialize<CustomerModel>(item.AsBsonDocument);
+        }
 
         public void Delete(string itemId)
         {
@@ -37,38 +47,9 @@ namespace DAL
             collection.DeleteOne(filter);
         }
 
-        public List<CustomerModel> GetAll()
-        {
-            var items = collection.Find(new BsonDocument()).ToList();
-            var returnList = new List<CustomerModel>();
-
-            foreach (var document in items)
-            {
-                returnList.Add(JsonConvert.DeserializeObject<CustomerModel>(document.ToJson()));
-            }
-
-            return returnList;
-        }
-
-        public CustomerModel GetSingle(string itemId)
-        {
-            var filter = Builders<BsonDocument>.Filter.Eq("_id", itemId);
-            var item = collection.Find(filter);
-            return JsonConvert.DeserializeObject<CustomerModel>(item.ToJson());
-        }
-
         public void Update(CustomerModel item)
         {
             throw new NotImplementedException();
-        }
-
-        public CustomerModel GetByPhone(string phoneNumber)
-        {
-            var filter = Builders<BsonDocument>.Filter.Eq("PhoneNumber", phoneNumber);
-
-            var item = collection.Find(filter).FirstOrDefault();
-
-            return BsonSerializer.Deserialize<CustomerModel>(item);
         }
     }
 }

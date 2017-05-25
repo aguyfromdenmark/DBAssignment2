@@ -8,8 +8,7 @@ namespace DAL
 {
     public interface IDatabase<T>
     {
-        T GetSingle(string itemId);
-        List<T> GetAll();
+        T GetByPhone(string phoneNumber);
         void Create(T item);
         void Update(T item);
         void Delete(string itemId);
