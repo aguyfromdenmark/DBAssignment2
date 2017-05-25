@@ -17,6 +17,7 @@ namespace Model
         public OrderModel()
         {
             Lines = new List<OrderLineModel>();
+            Id = ObjectId.GenerateNewId();
         }
 
 

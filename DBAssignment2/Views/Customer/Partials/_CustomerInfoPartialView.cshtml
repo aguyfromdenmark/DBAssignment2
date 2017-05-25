@@ -1,7 +1,7 @@
 ﻿@using Model
 @model CustomerModel
 
-<ul>
+<ul> @* Sætter input ind for customer infor *@
     <li>@Model.Id.ToString()</li>
     <li>@Model.FirstName @Model.LastName</li>
     <li>@Model.Address - @Model.ZipCode @Model.City</li>
