@@ -4,6 +4,7 @@
 
 <h2>Customer Information System</h2>
 <div>
+    <h3>Search for customer</h3>
     @using (Html.BeginForm("GetCustomerByPhone", "Customer", FormMethod.Post, new { @id = "searchByPhoneForm" }))
     {
         @Html.TextBox("phoneNumber", null, new { placeholder = "Search by phone number" })
@@ -12,6 +13,7 @@
 </div>
 
 <div>
+    <h3>Create a new customer</h3>
     @using (Html.BeginForm("CreateCustomer", "Customer", FormMethod.Post, new { @id = "createCustomerForm" }))
     {
         <input type="text" name="FirstName" placeholder="First Name" />
@@ -29,6 +31,7 @@
     }
 </div>
 <div class="loader"></div>
+<h3>Operation result:</h3>
 <div id="result">
 
 </div>
