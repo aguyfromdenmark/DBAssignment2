@@ -1,14 +1,17 @@
 ﻿@using Model
 @model CustomerModel
 
-<ul> @* Sætter input ind for customer infor *@
-    <li>@Model.Id.ToString()</li>
-    <li>@Model.FirstName @Model.LastName</li>
-    <li>@Model.Address - @Model.ZipCode @Model.City</li>
-    <li><i>@Model.PhoneNumber</i></li>
-    <li>@Model.Email</li>
-    <li>
-        <strong>Orders</strong>
+@using (Html.BeginForm("UpdateCustomer", "Customer", FormMethod.Post, new { @id = "UpdateCustomerForm" }))
+{
+    <ul>
+        @* Sætter input ind for customer infor *@
+        <li>@Model.Id.ToString()</li>
+        <li><input type="text" name="FirstName" value="@Model.FirstName" /> <input type="text" name="LastName" value="@Model.LastName" /></li>
+        <li><input type="text" name="Address" value="@Model.Address" /> - <input type="number" name="ZipCode" value="@Model.ZipCode" /> <input type="text" name="City" value="@Model.City" /></li>
+        <li><input type="tel" name="PhoneNumber" value="@Model.PhoneNumber" /></li>
+        <li><input type="email" name="Email" value="@Model.Email" /></li>
+        <li>
+            <strong>Orders</strong>
 
             @foreach (var order in Model.Orders)
             {
@@ -19,7 +22,7 @@
                         <strong>Lines</strong>
                         <ul>
                             @foreach (var line in order.Lines)
-                {
+                            {
                                 <li>@line.Id.ToString() - @line.Name - @line.Quantity - @line.Price</li>
                             }
                         </ul>
@@ -27,5 +30,24 @@
                     <li>@order.TotalPrice</li>
                 </ul>
             }
-    </li>
-</ul>
+        </li>
+    </ul>
+    <button type="submit" id="updateCustomerButton">Update</button>
+    <button type="button" id="deleteCustomerButton">Delete</button>
+}
+
+@section scripts {
+    <script>
+        $('#UpdateCustomerForm').on('submit', function (e) {
+            $('.loader').show();
+            e.preventDefault();
+            $(this).ajaxSubmit({
+                success: function () {
+                    $('.loader').hide();
+                }
+
+            });
+        });
+
+    </script>
+}

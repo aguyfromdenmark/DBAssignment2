@@ -55,7 +55,10 @@ namespace DAL
 
         public void Update(CustomerModel item)
         {
-            throw new NotImplementedException();
+            var itemAsJson = item.ToJson();
+            var itemAsBson = BsonSerializer.Deserialize<BsonDocument>(itemAsJson);
+            var filter = Builders<BsonDocument>.Filter.Eq("_id", item.Id);
+            collection.ReplaceOne(filter, itemAsBson);
         }
     }
 }

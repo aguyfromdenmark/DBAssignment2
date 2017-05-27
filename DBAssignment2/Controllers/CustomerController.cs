@@ -79,5 +79,10 @@ namespace DBAssignment2.Controllers
                 return PartialView("Partials/_ErrorPartialView", errorModel);
             }
         }
+
+        public void UpdateCustomer(CustomerModel customer)
+        {
+            _customerBll.UpdateCustomer(customer);
+        }
     }
 }
