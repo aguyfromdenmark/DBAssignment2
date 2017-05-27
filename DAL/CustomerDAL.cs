@@ -38,7 +38,13 @@ namespace DAL
 
             var item = collection.Find(filter).FirstOrDefault();
 
-            return BsonSerializer.Deserialize<CustomerModel>(item.AsBsonDocument);
+            if (item != null)
+            {
+                return BsonSerializer.Deserialize<CustomerModel>(item.AsBsonDocument);
+            }else
+            {
+                return null;
+            }
         }
 
         public void Delete(string itemId)
