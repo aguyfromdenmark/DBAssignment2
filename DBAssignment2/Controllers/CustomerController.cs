@@ -91,5 +91,14 @@ namespace DBAssignment2.Controllers
             //var returnCustomer = _customerBll.GetCustomerByPhone(customer.PhoneNumber.ToString());
             //return PartialView("Partials/_CustomerInfoPartialView", returnCustomer);
         }
+
+        [HttpPost]
+        public ActionResult DeleteCustomer(string customerId)
+        {
+            _customerBll.DeleteCustomer(customerId);
+
+            var returnModel = new ErrorViewModel() { ErrorMessage = "The customer was deleted", StatusCode = 200 };
+            return PartialView("Partials/_ErrorPartialView", returnModel);
+        }
     }
 }

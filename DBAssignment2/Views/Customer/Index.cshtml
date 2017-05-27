@@ -47,7 +47,7 @@
                 success: function () {
                     $('.loader').hide();
                 }
-                
+
             });
         });
 
@@ -62,13 +62,21 @@
             })
         });
 
-        $(document).on('submit',"#updateCustomerForm", function (e) {
+        $(document).on('submit', "#updateCustomerForm", function (e) {
             $('.loader').show();
             e.preventDefault();
             $(this).ajaxSubmit({
                 success: function () {
                     $('.loader').hide();
                 }
+            });
+        });
+
+        $(document).on('click', '#deleteCustomerButton', function (e) {
+            e.preventDefault();
+            var id = $(e.target).val();
+            $.post("customer/DeleteCustomer", { customerId: id }, function (result) {
+                $('#result').html(result);
             });
         });
     </script>

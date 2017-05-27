@@ -49,7 +49,7 @@ namespace DAL
 
         public void Delete(string itemId)
         {
-            var filter = Builders<BsonDocument>.Filter.Eq("_id", itemId);
+            var filter = Builders<BsonDocument>.Filter.Eq("_id", ObjectId.Parse(itemId));
             collection.DeleteOne(filter);
         }
 
