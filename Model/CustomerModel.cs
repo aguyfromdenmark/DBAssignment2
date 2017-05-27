@@ -21,6 +21,7 @@ namespace Model
 
         public CustomerModel()
         {
+            Id = ObjectId.GenerateNewId();
             Orders = new List<OrderModel>();   
         }
 
