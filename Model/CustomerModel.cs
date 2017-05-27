@@ -23,5 +23,13 @@ namespace Model
         {
             Orders = new List<OrderModel>();   
         }
+
+        public void CreateIdFromString(string id)
+        {
+            if (id != null)
+            {
+                this.Id = ObjectId.Parse(id);
+            }
+        }
     }
 }

@@ -61,5 +61,15 @@
                 }
             })
         });
+
+        $(document).on('submit',"#updateCustomerForm", function (e) {
+            $('.loader').show();
+            e.preventDefault();
+            $(this).ajaxSubmit({
+                success: function () {
+                    $('.loader').hide();
+                }
+            });
+        });
     </script>
 }

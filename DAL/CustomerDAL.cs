@@ -55,10 +55,17 @@ namespace DAL
 
         public void Update(CustomerModel item)
         {
-            var itemAsJson = item.ToJson();
-            var itemAsBson = BsonSerializer.Deserialize<BsonDocument>(itemAsJson);
             var filter = Builders<BsonDocument>.Filter.Eq("_id", item.Id);
-            collection.ReplaceOne(filter, itemAsBson);
+            var update = Builders<BsonDocument>.Update
+                .Set("FirstName", item.FirstName)
+                .Set("LastName", item.LastName)
+                .Set("Address", item.Address)
+                .Set("ZipCode", item.ZipCode)
+                .Set("City", item.City)
+                .Set("PhoneNumber", item.PhoneNumber)
+                .Set("Email", item.Email);
+
+            collection.UpdateOne(filter, update);
         }
     }
 }

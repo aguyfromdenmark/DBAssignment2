@@ -25,7 +25,8 @@ namespace DBAssignment2.Controllers
             if (customer != null)
             {
                 return PartialView("Partials/_CustomerInfoPartialView", customer);
-            }else
+            }
+            else
             {
                 var errorModel = new ErrorViewModel() { StatusCode = 404, ErrorMessage = "No customer found" };
                 return PartialView("Partials/_ErrorPartialView", errorModel);
@@ -33,6 +34,7 @@ namespace DBAssignment2.Controllers
 
         }
 
+        [HttpPost]
         public ActionResult CreateCustomer(CustomerModel customer)
         {
 
@@ -80,9 +82,14 @@ namespace DBAssignment2.Controllers
             }
         }
 
-        public void UpdateCustomer(CustomerModel customer)
+        [HttpPost]
+        public void UpdateCustomer(CustomerModel customer, string Id)
         {
+            customer.CreateIdFromString(Id);
             _customerBll.UpdateCustomer(customer);
+
+            //var returnCustomer = _customerBll.GetCustomerByPhone(customer.PhoneNumber.ToString());
+            //return PartialView("Partials/_CustomerInfoPartialView", returnCustomer);
         }
     }
 }

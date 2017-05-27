@@ -1,11 +1,11 @@
 ﻿@using Model
 @model CustomerModel
 
-@using (Html.BeginForm("UpdateCustomer", "Customer", FormMethod.Post, new { @id = "UpdateCustomerForm" }))
+@using (Html.BeginForm("UpdateCustomer", "Customer", FormMethod.Post, new { @id = "updateCustomerForm" }))
 {
     <ul>
         @* Sætter input ind for customer infor *@
-        <li>@Model.Id.ToString()</li>
+        <li>@Model.Id.ToString() <input  type="hidden" name="Id" value="@Model.Id.ToString()"/></li>
         <li><input type="text" name="FirstName" value="@Model.FirstName" /> <input type="text" name="LastName" value="@Model.LastName" /></li>
         <li><input type="text" name="Address" value="@Model.Address" /> - <input type="number" name="ZipCode" value="@Model.ZipCode" /> <input type="text" name="City" value="@Model.City" /></li>
         <li><input type="tel" name="PhoneNumber" value="@Model.PhoneNumber" /></li>
@@ -34,20 +34,4 @@
     </ul>
     <button type="submit" id="updateCustomerButton">Update</button>
     <button type="button" id="deleteCustomerButton">Delete</button>
-}
-
-@section scripts {
-    <script>
-        $('#UpdateCustomerForm').on('submit', function (e) {
-            $('.loader').show();
-            e.preventDefault();
-            $(this).ajaxSubmit({
-                success: function () {
-                    $('.loader').hide();
-                }
-
-            });
-        });
-
-    </script>
 }
